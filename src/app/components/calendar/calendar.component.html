@@ -1,0 +1,81 @@
+<!--<h2>Liste des evenements</h2>-->
+
+<!--<table class="table mt-4">-->
+<!--  <thead>-->
+<!--  <tr>-->
+
+<!--    <th scope="col">title</th>-->
+<!--    <th scope="col">time</th>-->
+<!--    <th scope="col">type</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let event of events">-->
+<!--    <td>{{ event.title }}</td>-->
+<!--    <td>{{ event.time }}</td>-->
+<!--    <td>{{ event.type }}</td>-->
+<!--    <td>-->
+<!--      <button class="btn btn-dark">edit</button>&nbsp;-->
+<!--      <button class="btn btn-success" (click)="suppEvent()" type="submit">Delete</button>-->
+
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+<h2 class="uk-panel-title">Liste des événements</h2>
+
+<form class="uk-form">
+  <input ng-model="search.$" placeholder="Recherche par titre">
+  <input ng-model="search.title" placeholder="Recherche par heure">
+  <input ng-model="search.description" placeholder="Recherche par type">
+</form>
+
+<table class="table mt-4">
+  <thead>
+  <tr>
+    <th scope="col">Titre</th>
+    <th scope="col">Date de debut</th>
+    <th scope="col">Type</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody ng-repeat="book in books | filter:searchText" ng-click="selectBook(book)">
+  <tr *ngFor="let event of events">
+
+
+<!--      <input type="text" name="titre" [(ngModel)]="event.title">-->
+<!--      <input type="text" name="time" [(ngModel)]="event.time">-->
+<!--      <input type="text" name="type" [(ngModel)]="event.type">-->
+<!--      <button class="btn btn-primary" (click)="supprimerChamps()">Submit</button>-->
+
+    <td>{{ event.title }}
+      <div *ngIf="champsAffiches">
+        <input type="text" class="form-control" [(ngModel)]=" event.title">
+      </div>
+    </td>
+    <td>{{ event.time }}
+      <div *ngIf="champsAffiches">
+        <input type="datetime-local" class="form-control" [(ngModel)]=" event.time">
+      </div>
+    </td>
+    <td>{{ event.type }}
+      <div *ngIf="champsAffiches">
+      <select class="form-control" id="type" [(ngModel)]="event.type" name="type">
+        <option value="Routine">Routine</option>
+        <option value="Repas">Repas</option>
+        <option value="Travail">Travail</option>
+        <option value="Loisir">Loisir</option>
+      </select>
+      </div>
+    </td>
+    <td>
+      <button class="btn btn-primary" (click)="afficherChamps()">Modifier</button>
+      <button class="btn btn-danger" (click)="suppEvent(event.id)" type="button">Supprimer</button>
+      <button class="btn btn-success" (click)="miseAjourEvent(event.id)" type="button">Appliquer les modifications</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
